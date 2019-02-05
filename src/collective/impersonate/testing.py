@@ -5,7 +5,7 @@ from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PloneSandboxLayer
-from plone.testing import z2
+from plone.testing import zserver
 
 import collective.impersonate
 
@@ -43,7 +43,7 @@ COLLECTIVE_IMPERSONATE_ACCEPTANCE_TESTING = FunctionalTesting(
     bases=(
         COLLECTIVE_IMPERSONATE_FIXTURE,
         REMOTE_LIBRARY_BUNDLE_FIXTURE,
-        z2.ZSERVER_FIXTURE
+        zserver.ZSERVER_FIXTURE
     ),
     name='CollectiveImpersonateLayer:AcceptanceTesting'
 )
