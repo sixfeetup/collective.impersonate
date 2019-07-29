@@ -10,19 +10,20 @@
       name="url_expr">string:${globals_view/navigationRootUrl}/@@impersonate</property>
    <property name="link_target"></property>
    <property name="icon_expr"></property>
+   <property name="available_expr">python:not context.REQUEST.get('impersonate')</property>
    <property name="permissions">
     <element value="Manage Site"/>
    </property>
    <property name="visible">True</property>
   </object>
-  <object name="logout" meta_type="CMF Action" i18n:domain="plone">
-   <property name="title" i18n:translate="">Log out</property>
+  <object name="logout-impersonate" meta_type="CMF Action" i18n:domain="plone">
+   <property name="title" i18n:translate="">Log out impersonated user</property>
    <property name="description" i18n:translate=""></property>
    <property
-      name="url_expr">string:${globals_view/navigationRootUrl}/logout</property>
+      name="url_expr">string:${globals_view/navigationRootUrl}/@@logout-impersonate</property>
    <property name="link_target"></property>
    <property name="icon_expr"></property>
-   <property name="available_expr">python:member is not None</property>
+   <property name="available_expr">python:context.REQUEST.get('impersonate')</property>
    <property name="permissions">
     <element value="View"/>
    </property>

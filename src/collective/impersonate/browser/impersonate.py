@@ -30,6 +30,7 @@ class Impersonate(BrowserView):
             self.context.acl_users.session._setupSession(
                 username, self.context.REQUEST.RESPONSE)
 
+            self.request.RESPONSE.setCookie('impersonate', username)
             self.request.RESPONSE.redirect(api.portal.get().absolute_url())
 
     def users(self):
@@ -45,3 +46,12 @@ class Impersonate(BrowserView):
         return getAdapter(aq_inner(self.context),
                           IUserGroupsSettingsSchema,
                           ).many_users
+
+
+class LogoutImpersonate(BrowserView):
+    """Logout as impersonated user."""
+
+    def __call__(self):
+        self.request.response.expireCookie('__ac')
+        self.request.response.expireCookie('impersonate')
+        self.request.RESPONSE.redirect(api.portal.get().absolute_url())
