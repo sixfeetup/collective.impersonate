@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """@@impersonate view handler."""
 
+import transaction
 from Acquisition import aq_inner
 from plone import api
 from Products.CMFPlone.interfaces import IUserGroupsSettingsSchema
@@ -54,4 +55,5 @@ class LogoutImpersonate(BrowserView):
     def __call__(self):
         self.request.response.expireCookie('__ac')
         self.request.response.expireCookie('impersonate')
+        transaction.commit()
         self.request.RESPONSE.redirect(api.portal.get().absolute_url())
